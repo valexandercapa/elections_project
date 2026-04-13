@@ -207,7 +207,7 @@ An exponent less than 2 indicates that the spatial variance of massive, hegemoni
 Large parties inherently possess both a "structural floor" (a baseline of rigidly loyal partisan voters impervious to environmental noise) and a "demographic ceiling." This confinement actively dampens the extreme spatial fluctuations of massive parties, dragging the global scaling exponent $b$ down from the theoretical $2.0$ to the empirical $\sim 1.7$.
 #### Historical Evolution of the Scaling Exponent
 
-![[Screenshot 2026-04-13 at 7.46.37 PM.png]]
+![[Taylor_Evolution.png]]
 
 The temporal evolution of the $b$ exponent acts as a macro-seismograph, tracking the structural stability and polarization of the Spanish electoral ecosystem:
 
