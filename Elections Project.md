@@ -3,7 +3,7 @@
 To give a mathematically rigorous description of Jacopo Grilli's (2020) methodological framework, it is imperative to start from the dynamic core that unifies the three observed laws: the Stochastic Logistic Model (SLM).
 ### 1. The Dynamical System: Stochastic Logistic Model (SLM)
 The central premise is that the relative abundance of a species $i$ in a community, denoted as $x_i$, evolves according to a Langevin stochastic differential equation:
-$$\frac{dx_i(t)}{dt} = \frac{x_i(t)}{\tau_i} \left( 1 - \frac{x_i(t)}{K_i} \right) + \sigma_i x_i(t) \cdot \xi_i(t)$$
+$$\frac{dx_i(t)}{dt} = \frac{x_i(t)}{\tau_i} \left( 1 - \frac{x_i(t)}{K_i} \right) + \sqrt{\frac{\sigma_i}{\tau_i}} x_i(t) \cdot \xi_i(t)$$
 Where:
 - $\tau_i$: Time scale of return to equilibrium (growth rate).
 - $K_i$: Carrying capacity of the species in the environment.
