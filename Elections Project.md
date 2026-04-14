@@ -13,8 +13,8 @@ Where:
 From the associated Fokker-Planck equation, it is derived that the stationary probability distribution for the abundance $x_i$ is a Gamma Distribution:
 $$\mathcal{P}(x_i; \alpha_i, \beta_i) = \frac{1}{\Gamma(\alpha_i) \beta_i^{\alpha_i}} x_i^{\alpha_i - 1} e^{-x_i / \beta_i}$$
 The distribution parameters are related to the dynamic parameters as follows:
-- $\alpha_i = \frac{2}{\sigma_i^2 \tau_i} - 1$ (Shape parameter. Represents the inverse of the volatility).
-- $\beta_i = \frac{K_i \sigma_i^2 \tau_i}{2}$ (Scale parameter. Represents the typical size of the fluctuations).
+- $\alpha_i = \frac{2}{\sigma_i} - 1$ (Shape parameter. Represents the inverse of the volatility).
+- $\beta_i = \frac{K_i \sigma_i}{2}$ (Scale parameter. Represents the typical size of the fluctuations).
 ### 2. AFD (Abundance Fluctuation Distribution)
 The AFD describes how the abundance of a single entity fluctuates across different spatial samples (urns/municipalities). To demonstrate universality, we must strip the party's intrinsic size from its fluctuation profile. We achieve this by rescaling the variable by its own mean: $z_i = x_i / \langle x_i \rangle$.
 
@@ -30,7 +30,7 @@ To fit the empirical $y_i$ data to the theoretical Exp-Gamma model using computa
 To strictly respect the underlying Langevin dynamics, the scale parameter in SciPy must be fixed to 1 (`fscale=1`). If the scale is allowed to vary, the software mathematically alters the underlying variable from $x$ to $x^{1/\text{scale}}$, destroying the physical meaning of the SLM. By fixing the scale to 1, the SciPy output directly translates to our thermodynamic parameters:
 
 1. **Shape (`c`):** Corresponds exactly to our physical $\alpha_i$.
-2. **Location (`loc`):** Represents the natural logarithm of the scale of the underlying rescaled Gamma distribution. Since the theoretical scale of $z_i$ is $1/\alpha_i$, the physical coherence of the model can be verified by confirming that empirically, $\text{loc} \approx -\ln(\alpha_i)$.
+2. **Location (`loc`):** Represents the natural logarithm of the scale of the underlying rescaled Gamma distribution. Since the theoretical scale of $z_i$ is $1/\alpha_i$, the physical coherence of the model can be verified by confirming that empirically, $\text{loc} = -\ln(\alpha_i)$.
 #### Electoral Data: The Treatment of Zeros
 **1. Grilli's Method: The Poisson Sampling Assumption**
 In Grilli's (2020) framework, the SLM defines the abundance $x_i$ as a continuous, strictly positive state variable ($x_i > 0$). However, empirical data consists of discrete integer counts of DNA reads ($k_{i,s}$). To bridge this gap, Grilli assumes a Poisson sampling process:
@@ -48,11 +48,6 @@ We adopt a strict truncation for two reasons:
 
 - **A. Confounding Structural vs. Stochastic Zeros:** In ecology, it is assumed that a bacterium could theoretically exist anywhere in the lake. In politics, the ecosystem is bounded by rigid regional topologies (e.g., nationalist parties only print ballots in specific provinces). If we feed our raw matrix into a Negative Binomial fit, the model would treat a province where a party did not run as a Poisson sampling failure.
 - **B. The Logarithmic Positivity Constraint:** We operate directly in the logarithmic space: $y_i = \ln(x_i/\langle x_i \rangle)$. The logarithm is a strictly continuous multiplicative operator; it cannot process an absolute zero ($-\infty$).
-
-**3. Treatment of Zeros: The Two-Step Filter and the Conditional Mean**
-To respect the topological boundaries of the electoral space and the mathematical limits of the logarithmic operator, we implement a strict two-step filtering protocol:
-1. **Macro-level Filter (Structural Zeros):** We eliminate any spatial domain (province) where the sum of a party's votes is strictly zero. This removes topological absences from the phase space.
-2. **Micro-level Filter (Fluctuation Zeros):** We eliminate specific urns where the party received zero votes _prior_ to calculating the mean abundance.
 
 Consequently, we redefine our theoretical parameter $\langle x_i \rangle$. We do not calculate the absolute mean; we calculate the **conditional mean abundance**, denoted as $\langle x_i \mid x_i > 0 \rangle$.
 
@@ -214,3 +209,10 @@ The temporal evolution of the $b$ exponent acts as a macro-seismograph, tracking
 1. **1993 - 2008:** During this period, the scaling exponent steadily climbed, peaking at $b \approx 1.88$ in 2008. This era was characterized by the absolute hegemony of two major political blocs. The ecosystem was highly predictable and behaved almost exactly like a pure multiplicative environment. The two systemic giants absorbed almost all environmental fluctuations proportionally, pushing the ecosystem to the edge of the theoretical $b=2$ limit.
 2. **2011 - 2015:** The exponent suffers a violent collapse, plunging to $b \approx 1.62$ in 2011 and bottoming out at $b \approx 1.59$ in 2015. This thermodynamic crash coincides precisely with the systemic rupture of the Spanish political landscape (the 15-M movement and the abrupt emergence of new national parties). The sudden influx of mid-sized entities broke the established multiplicative scaling. The spatial variance of the old hegemonic parties collapsed as their traditional voter bases shattered and scattered across the new options, forcing the entire ecosystem into a state characterized by heavy additive noise.
 3. **2019 - 2023:** In recent electoral cycles, the exponent shows a slow, secular recovery back toward higher values ($b \approx 1.68$ in 2023). This indicates that the fragmented, multi-party ecosystem has survived its initial chaotic inception and is beginning to crystallize into a new stable multiplicative regime, establishing rigid niches and structural predictability once again.
+### 5. Time evolution
+### 6. Spatial correlation functions
+A slow decline indicates a segregated system. The fact that PP, VOX, and SUMAR are not declining suggests that Spain is divided into geographically stable ideological "fiefdoms."
+PSOE's rapid decline suggests that it is the most "national" party in terms of fluctuation dynamics: its voters are everywhere, but its strength varies greatly from one street to another, behaving more like a fluid than a solid. (Based on previous AFD analysis and regionalization).
+### Ideas
+MAD vs AFD ($\sigma_{MAD}$ vs $1/\alpha$) phase space?
+Time evolution of the spatial correlation (territorial segregation, )
