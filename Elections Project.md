@@ -73,7 +73,7 @@ The parameters, specifically $\alpha$, fluctuate significantly depending on the 
 
 ![[AFD_alpha_Evolution.png]]
 
-Because the variance of the local fluctuations is $1/\alpha$, an increasing $\alpha$ mathematically dictates a decreasing variance. The system is experiencing a hardening of its ecological niches. In the early democratic period, a party's local volatility was high (low $\alpha$, high spatial variance). In the modern era, the electorate has "crystallized". Driven by intense political polarization, ideological bloc fidelity, and the national homogenization of information via digital media, voters are less susceptible to local environmental noise. The system is structurally more rigid at the microscopic (urn) level than ever before.
+Because the variance of the local fluctuations is $1/\alpha$, an increasing $\alpha$ mathematically dictates a decreasing variance. The system is experiencing a hardening of its ecological niches. In the early democratic period, a party's local volatility was high (low $\alpha$, high spatial variance). In the modern era, the electorate has "crystallized". Driven by intense political polarization, ideological bloc fidelity, and the national homogenization, voters are less susceptible to local environmental noise. The system is structurally more rigid at the polling place level.
 #### Goodness of Fit: The Kolmogorov-Smirnov Distance
 To evaluate the competition between the SLM (Exp-Gamma) and the Null Model (Normal), we rely on the Kolmogorov-Smirnov statistic ($D_{KS}$), which measures the maximum absolute vertical distance between the empirical and theoretical Cumulative Distribution Functions (CDFs).
 
